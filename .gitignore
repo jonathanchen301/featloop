@@ -1,4 +1,6 @@
 .venv/
+.env
+.env.*
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -13,7 +15,6 @@ models/
 data/processed/
 !data/processed/.gitkeep
 reports/*.png
-!reports/canary.png
 !reports/canary.png
 reports/*.json
 !reports/.gitkeep

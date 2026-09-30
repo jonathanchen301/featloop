@@ -85,6 +85,12 @@ Event path:  events/retrain.trigger  →  make retrain
 | MLflow confusion | Miss the UI | `make demo` prints `mlflow ui --backend-store-uri ./mlruns` |
 | Honesty breach | Resume metrics pasted as project results | README + LICENSE-DATA: project metrics ≠ Guardians numbers |
 
+## Trust boundaries (local demo)
+
+- **`mlruns/` is a trust boundary.** `mlflow.sklearn.load_model` uses pickle under the hood. Only load models you trained in this repo; do not point the tracking URI at an untrusted or shared volume. Prefer `mlflow ui` bound to localhost.
+- **Vendored `data/raw/` is the happy path.** `scripts/download_data.py` is optional refresh only: HTTPS allowlist (`archive.ics.uci.edu`), no redirect following, 50 MiB size cap, and extract paths constrained under `data/raw/`.
+- **No secrets in-repo.** `.env` is gitignored; do not commit credentials.
+
 ## Data
 
 Vendored under `data/raw/hour.csv` with attribution in [`data/raw/LICENSE-DATA.md`](data/raw/LICENSE-DATA.md). Optional refresh: `python scripts/download_data.py` (demo does **not** require network when raw is present).
