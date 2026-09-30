@@ -1,0 +1,54 @@
+# Offline feature definitions (human-readable registry).
+# Entity: bike station-hour proxy via (dteday, hr) → entity_id
+entity: demand_hour
+entity_keys: [dteday, hr]
+timestamp: event_ts
+label: cnt
+label_task: regression  # MAE/RMSE primary; high-demand binary used in canary
+
+features:
+  - name: season
+    dtype: int
+    description: Season (1-4)
+  - name: yr
+    dtype: int
+    description: Year index (0=2011, 1=2012)
+  - name: mnth
+    dtype: int
+    description: Month 1-12
+  - name: hr
+    dtype: int
+    description: Hour 0-23
+  - name: holiday
+    dtype: int
+    description: Holiday flag
+  - name: weekday
+    dtype: int
+    description: Day of week
+  - name: workingday
+    dtype: int
+    description: Working day flag
+  - name: weathersit
+    dtype: int
+    description: Weather situation category
+  - name: temp
+    dtype: float
+    description: Normalized temperature
+  - name: atemp
+    dtype: float
+    description: Normalized feeling temperature
+  - name: hum
+    dtype: float
+    description: Normalized humidity
+  - name: windspeed
+    dtype: float
+    description: Normalized wind speed
+  - name: cnt_lag_1h
+    dtype: float
+    description: Prior hour ridership (point-in-time safe lag)
+  - name: cnt_roll_24h_mean
+    dtype: float
+    description: Rolling 24h mean of cnt (shifted, no leakage)
+  - name: is_rush_hour
+    dtype: int
+    description: 1 if hour in {7,8,9,16,17,18}

@@ -1,0 +1,4 @@
+# Copy to events/retrain.trigger (or `make retrain` creates it).
+# Presence / mtime bump stands in for an upstream data-upload event.
+reason: holiday_or_weather_shock
+created_by: featloop-demo
